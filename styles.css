@@ -1,0 +1,357 @@
+/* ===== 问卷星风格 ===== */
+:root {
+  --blue: #4a90e2;
+  --blue-dark: #3a7bc8;
+  --red: #e64340;
+  --text: #333333;
+  --muted: #999999;
+  --line: #f0f0f0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 让 hidden 属性始终生效（不被 display: flex 等覆盖） */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Helvetica Neue", sans-serif;
+  background: #ffffff;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== 屏幕切换 ===== */
+.view {
+  display: none;
+}
+
+.view.is-active {
+  display: block;
+}
+
+/* ===== 顶部蓝条 ===== */
+.topbar {
+  background: var(--blue);
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 13px 16px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== 问卷容器 ===== */
+.survey {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.survey__header {
+  background: #f7f8fa;
+  border-radius: 6px;
+  padding: 16px 16px 12px;
+  margin: 16px 0 8px;
+}
+
+.survey__heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.survey__intro {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #666666;
+}
+
+.survey__intro p {
+  margin-bottom: 8px;
+}
+
+.survey__intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== 单题 ===== */
+.field {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.field__label {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.field__req {
+  color: var(--red);
+  margin-right: 2px;
+  font-weight: 400;
+}
+
+.field__options {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 2px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 圆形单选按钮 */
+.option::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1.5px solid #c9c9c9;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: border-color 0.15s;
+}
+
+.option.is-selected::before {
+  border-color: var(--blue);
+  background: radial-gradient(circle, var(--blue) 40%, transparent 44%);
+}
+
+/* 未答提示 */
+.field.is-error .field__label {
+  color: var(--red);
+}
+
+.field.is-error .option::before {
+  border-color: var(--red);
+}
+
+.field.is-error {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ===== 提交区 ===== */
+.survey__footer {
+  padding-top: 22px;
+}
+
+.survey__error {
+  background: #fdecec;
+  color: #d64545;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.survey__submit {
+  width: 100%;
+  background: var(--blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.15s;
+}
+
+.survey__submit:hover {
+  background: var(--blue-dark);
+}
+
+.survey__submit:active {
+  background: var(--blue-dark);
+}
+
+.survey__copyright {
+  text-align: center;
+  font-size: 12px;
+  color: #b0b0b0;
+  margin-top: 22px;
+}
+
+/* ===== 第 0 幕：完成问卷 ===== */
+.act--done {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+
+.done__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #4cd964;
+  color: #ffffff;
+  font-size: 32px;
+  line-height: 64px;
+  margin-bottom: 18px;
+}
+
+.done__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.done__text {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ===== 黑屏过渡 ===== */
+.blackout {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.blackout.fade {
+  opacity: 0;
+}
+
+/* ===== 第 1 幕：蛋糕 + 蜡烛 ===== */
+.act--cake {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, #2b3452 0%, #161d30 55%, #0a0e18 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.cake-title {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffe27a;
+  text-shadow: 0 0 34px rgba(255, 210, 120, 0.45);
+  animation: pop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cake-scene {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cake-scene canvas {
+  display: block;
+}
+
+/* 吹蜡烛按钮 */
+.blow-btn {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #7a4a00;
+  background: linear-gradient(180deg, #ffe27a 0%, #ffb347 100%);
+  border: none;
+  border-radius: 999px;
+  padding: 15px 42px;
+  cursor: pointer;
+  box-shadow: 0 6px 26px rgba(255, 170, 60, 0.35);
+  animation: pop 0.6s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.15s, opacity 0.15s;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.blow-btn:active {
+  transform: scale(0.96);
+}
+
+.blow-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== 第 2 幕：烟花背景 + 视频 ===== */
+.act--final {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 35%, #2b3452 0%, #161d30 55%, #0a0e18 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fx {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.final-video {
+  position: relative;
+  z-index: 2;
+  max-width: 70vw;
+  max-height: 60vh;
+  background: #000;
+}
+
+/* ===== 通用弹入 ===== */
+@keyframes pop {
+  from { opacity: 0; transform: translateY(26px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 480px) {
+  .cake-title { font-size: 30px; }
+  .blow-btn { font-size: 16px; padding: 14px 34px; }
+  .final-video {
+    max-width: 86vw;
+    max-height: 48vh;
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大学生生活感受调查问卷</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 问卷页：直接打开就是问卷（问卷星风格） -->
+  <div class="view is-active" id="survey">
+    <div class="topbar">大学生生活感受调查问卷</div>
+
+    <div class="survey">
+      <div class="survey__header">
+        <h2 class="survey__heading">问卷说明</h2>
+        <div class="survey__intro">
+          <p>亲爱的同学：</p>
+          <p>您好！感谢您在百忙之中抽出宝贵时间参与本次调查。本问卷为“大学生生活感受调查问卷”，旨在了解当代大学生在日常生活、学习状态及心理感受等方面的真实情况。</p>
+          <p>本问卷采用匿名方式，所有数据仅用于统计分析，不会泄露您的任何个人隐私，请您放心填写。问卷共 8 道题，全部为单选题，预计用时约 1 分钟，题目无对错之分，请您根据实际情况如实作答。</p>
+          <p>您的每一份回答都对我们至关重要，衷心感谢您的支持与配合！</p>
+        </div>
+      </div>
+
+      <div class="survey__body" id="questions"></div>
+
+      <div class="survey__footer">
+        <p class="survey__error" id="formError" hidden></p>
+        <button class="survey__submit" id="submitBtn">提交</button>
+        <p class="survey__copyright">问卷星 提供技术支持</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 惊喜揭晓 -->
+  <div class="view" id="surprise">
+    <!-- 第 0 幕：完成问卷 -->
+    <div class="act act--done" id="actDone">
+      <div class="done__icon">✓</div>
+      <h2 class="done__title">问卷到此结束</h2>
+      <p class="done__text">感谢您的参与，您的回答已提交。</p>
+    </div>
+
+    <!-- 黑屏过渡 -->
+    <div class="blackout" id="blackout" hidden></div>
+
+    <!-- 第 1 幕：蛋糕 + 蜡烛 -->
+    <div class="act act--cake" id="actCake" hidden>
+      <h1 class="cake-title" id="cakeTitle">生日快乐</h1>
+
+      <div class="cake-scene" id="cakeScene"></div>
+
+      <button class="blow-btn" id="blowBtn">吹灭蜡烛</button>
+    </div>
+
+    <!-- 第 2 幕：烟花背景 + 视频 -->
+    <div class="act act--final" id="actNext" hidden>
+      <canvas class="fx" id="fxCanvas"></canvas>
+      <video class="final-video" id="birthdayVideo" autoplay muted playsinline>
+        <source src="birthday.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <script src="three.min.js"></script>
+  <script src="GLTFLoader.js"></script>
+  <script src="cake-data.js"></script>
+  <script src="cake3d.js"></script>
+  <script src="fireworks.js"></script>
+  <script src="final-effect.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
