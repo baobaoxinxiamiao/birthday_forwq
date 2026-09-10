@@ -132,8 +132,8 @@ function submit() {
         blackout.hidden = true;
         blackout.classList.remove("fade");
       }, 620);
-    }, 900);
-  }, 1800);
+    }, 500);
+  }, 800);
 }
 
 // ===== 吹灭蜡烛 =====
